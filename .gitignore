@@ -1,0 +1,17 @@
+# Entornos virtuales
+va/
+venv/
+.venv/
+
+# Python
+__pycache__/
+*.pyc
+
+# Archivos que generan los scripts
+salidas/
+
+# Editores y sistema
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
