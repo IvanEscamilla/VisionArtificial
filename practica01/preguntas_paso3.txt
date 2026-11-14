@@ -1,0 +1,47 @@
+PRÁCTICA 1 ·  Preguntas paso 3
+
+1. El traje es naranja. ¿En qué canal se ve más claro y en cuál más
+   oscuro? ¿Por qué?
+
+   Se ve más claro en el canal R (rojo) y más oscuro en el canal B (azul).
+   El naranja está formado sobre todo por rojo, algo de verde y casi nada
+   de azul. Un canal es más claro donde hay más de ese color, así que el
+   traje tiene valores altos en R y bajos en B.
+
+2. ¿Por qué al mostrar la imagen BGR sin convertir el traje se ve azul y
+   la piel azulada?
+
+   Porque OpenCV guarda los colores en orden B, G, R y Matplotlib espera
+   R, G, B. Al no convertir, Matplotlib interpreta el primer canal (que
+   es el azul) como rojo y el tercero (que es el rojo) como azul. Los dos
+   canales se intercambian: el naranja (mucho R) se ve azul y la piel
+   (también con mucho R) se ve azulada.
+
+3. ¿Por qué la imagen promedio_mal se ve con manchas oscuras justo en las
+   zonas claras?
+
+   Porque b, g y r son uint8 (máximo 255) y al sumarlos el resultado se
+   desborda: si la suma pasa de 255, da la vuelta (módulo 256). Por
+   ejemplo, 152 + 192 + 203 = 547, pero en uint8 queda 35. En las zonas
+   claras los tres canales tienen valores altos y la suma se pasa de 255,
+   así que el promedio sale muy bajo y esas zonas se ven oscuras. La
+   solución es convertir a uint16 antes de sumar.
+
+4. ¿Qué umbral separa mejor a la astronauta del fondo? ¿Existe un umbral
+   que lo haga perfecto? ¿Por qué?
+
+   El umbral de 127 es el que mejor la separa del fondo; con 64 casi todo
+   queda blanco y con 192 casi todo queda negro, perdiendo la figura.
+   Aun así, ningún umbral es perfecto, porque el brillo de la astronauta
+   y el del fondo se traslapan: hay zonas del traje y la piel tan oscuras
+   como partes del fondo, y partes del fondo tan claras como zonas de la
+   astronauta. Un solo valor de corte no puede separar intensidades que
+   se mezclan.
+
+5. La binaria ocupa la misma memoria que el gris, aunque solo tiene 2
+   valores. ¿Cuántos bits por píxel bastarían?
+
+   Bastaría 1 bit por píxel, porque solo hay 2 valores posibles (0 y 255).
+   Sin embargo, se guarda como uint8 (8 bits por píxel), por eso ocupa lo
+   mismo que el gris (256 KB). Con 1 bit por píxel ocuparía 32 KB (8 veces
+   menos), por ejemplo empaquetando los bits con np.packbits.
