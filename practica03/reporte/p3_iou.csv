@@ -1,0 +1,13 @@
+tarea,metodo,IoU,Dice,ms_frame
+A,Global T=150,0.1878,0.3162,0.0317
+A,Otsu,0.1219,0.2172,0.1330
+A,Adaptativo + limpieza,0.4426,0.6117,4.9800
+A,Bordes (Canny) rellenos,0.4848,0.6417,1.2648
+A,Fondo promedio,0.5657,0.7177,0.2388
+A,MOG2,0.5090,0.6595,1.8454
+A,Saturación HSV (dominio),0.9447,0.9715,0.7786
+B,Grupo k-means,0.4697,0.6299,2.8721
+B,Crecimiento de región,0.9492,0.9707,0.3614
+B,Color naranja,0.5038,0.6682,0.5127
+B,Color + tamaño + forma,0.8512,0.8732,1.1416
+B,Hough círculo,0.8529,0.8740,3.6033
