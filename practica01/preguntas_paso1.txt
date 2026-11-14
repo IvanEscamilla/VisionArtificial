@@ -1,0 +1,51 @@
+PRÁCTICA 1 Preguntas paso 1
+
+1. La imagen tiene shape = (512, 512, 3). ¿Qué significa cada número?
+   ¿Cuántos números guarda en total?
+   El primer número (512) es el número de filas. El segundo (512)
+   es el número de columnas. El tercero (3) es el número de
+   canales de color (B, G, R) de cada píxel.
+   En total guarda 512 x 512 x 3 = 786,432 números
+
+2. ¿Por qué la imagen a color ocupa exactamente el triple de memoria que
+   la imagen en gris?
+
+   Porquela imagen en gris tiene 1 valor por píxel no tiene RGB y la
+   de color tiene 3 valores por píxel RGB
+
+3. El cuadro rojo empieza en y=100, x=200. ¿Quedó a 100 píxeles del borde
+   superior o del izquierdo? ¿Por qué?
+
+   Quedó a 100 píxeles del borde superior (y a 200 del izquierdo).
+   Un píxel se accede como img[y, x] = img[fila, columna]: el primer
+   índice es la fila (y) y el segundo la columna (x). El origen (0, 0)
+   está en la esquina superior izquierda y la coordenada y crece hacia
+   abajo, por eso y=100 es la distancia desde el borde superior y x=200
+   la distancia desde el borde izquierdo.
+
+4. ¿Qué pasaría con la imagen original si escribieras marcada = imagen
+   (sin .copy())? Pruébalo.
+
+   Se modificaría también la original. En Python, marcada = imagen no crea
+   una copia de la matriz: solo crea otro nombre que apunta al mismo
+   arreglo en memoria. Al pintar el cuadro rojo en "marcada" se pinta en
+   "imagen", y al mostrar la original también aparece el cuadro rojo.
+   Con .copy() se crea un arreglo independiente y la original no cambia.
+
+5. En la región 6x6, el píxel naranja de la izquierda tiene R alto y el
+   morado de la derecha B alto. ¿Cuál de los dos es más claro en gris?
+   Explícalo con la fórmula del gris.
+
+   Fórmula: gris = 0.299*R + 0.587*G + 0.114*B
+
+   Naranja (B=56, G=87, R=213):
+   gris = 0.299*213 + 0.587*87 + 0.114*56 = 63.7 + 51.1 + 6.4 ≈ 121
+
+   Morado (B=176, G=76, R=116):
+   gris = 0.299*116 + 0.587*76 + 0.114*176 = 34.7 + 44.6 + 20.1 ≈ 99
+
+   El naranja es más claro en gris (121 contra 99). La fórmula da más peso
+   al rojo (0.299) y sobre todo al verde (0.587) que al azul (0.114),
+   porque el ojo humano es más sensible a esos colores. El naranja tiene
+   un R muy alto que aporta mucho, mientras que el B alto del morado
+   aporta poco por su peso pequeño y su R y G son menores.

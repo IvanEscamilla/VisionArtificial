@@ -1,0 +1,40 @@
+PRÁCTICA 1 · Preguntas paso 2
+
+1. ¿A partir de qué resolución ya no reconoces el rostro? ¿Y el parche de
+   la misión?
+
+   El rostro se reconoce hasta 64x64 (borroso) y ya no en 32x32. El parche
+   se pierde antes: en 64x64 no se distingue su detalle y en 32x32 es solo
+   un bloque morado. Los detalles pequeños ocupan pocos píxeles y
+   desaparecen primero.
+
+2. ¿Cuántas veces menos memoria ocupa la imagen cada vez que divides el
+   ancho y el alto entre 2? ¿Por qué no es "2 veces"?
+
+   4 veces menos. Se divide entre 2 el ancho y también el alto, así que
+   los píxeles bajan a 1/2 x 1/2 = 1/4 (768 KB -> 192 KB -> 48 KB).
+
+3. ¿Con cuántos bits empiezas a notar los falsos contornos? ¿En qué zonas
+   aparecen primero y por qué ahí?
+
+   Desde 3 bits (8 niveles), y se ven muy claros con 2 bits. Aparecen
+   primero en zonas de cambio suave, como el fondo y las sombras del traje,
+   porque el degradado se convierte en franjas planas con bordes que no
+   existen en la escena.
+
+4. La memoria real (nbytes) no baja al reducir los bits. ¿Por qué? ¿Qué
+   habría que hacer para que sí bajara?
+
+   Porque la imagen sigue en uint8: cada píxel ocupa 1 byte aunque use
+   pocos valores distintos. Para que baje habría que empaquetar los bits
+   (varios píxeles por byte, por ejemplo con np.packbits) o guardar en un
+   formato que use b bits por píxel o comprima la imagen.
+
+5. ¿Qué afecta más a la información de la imagen: pasar de 512x512 a
+   128x128 (16 veces menos píxeles) o de 8 a 2 bits (4 veces menos bits)?
+
+   Afecta más reducir la resolución: se pierden 16 veces menos datos
+   contra solo 4 veces menos en los bits. En la figura 1 se pierden el
+   parche, los bordes finos y al final el rostro, y ese detalle no se
+   recupera. En la figura 2, con 2 bits la imagen se ve posterizada, pero
+   las formas y los bordes principales se siguen reconociendo.
