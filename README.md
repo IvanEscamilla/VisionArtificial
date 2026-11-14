@@ -52,3 +52,8 @@ practica01/
    ```
 
 Requisitos: Python 3.10 o superior y VS Code con la extensión de Python. Una webcam es recomendable; si no tienes, las prácticas 2 y 3 funcionan con el video de `recursos/` usando `--video`.
+
+## Entrega de las prácticas
+
+La resolución de las tres prácticas (scripts, capturas y reportes en PDF) se describe en
+[ENTREGA.md](ENTREGA.md).
