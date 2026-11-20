@@ -1,0 +1,25 @@
+1. Con tu webcam: ¿cuántos FPS reporta y cuántos mides? Tapa la cámara con la mano o apaga la luz: ¿qué pasa con los FPS medidos? ¿Por qué?
+Mi webcam reporta 30 FPS, pero medí menos: en la última corrida el promedio fue de 22.6 FPS (556 frames en 24.6 s), y en pantalla vi valores entre 25 y 34 FPS según el momento. 
+Con la cámara tapada, los FPS medidos fueron 25.2, contra 34.3 con luz normal, o sea que bajaron. 
+Esto pasa porque con poca luz la exposición automática alarga el tiempo que el sensor capta cada imagen, así que la cámara tarda más en entregar cada frame. 
+El valor de 34.3, mayor a 30, es un pico pasajero: el medidor suaviza los saltos y a veces llegan frames acumulados juntos, así que el promedio real es el de 22 a 25 FPS.
+
+2. Pediste 1280×720. ¿Qué resolución obtuviste? ¿Por qué set() no garantiza nada?
+Pedí 1280×720 y obtuve exactamente 1280×720, aunque la cámara abrió por defecto en 640×480. 
+set() no garantiza nada porque solo le pide al driver un modo, y el driver elige el más cercano que su hardware soporte. 
+Puede ignorar la petición sin avisar o darte otra resolución, por eso se vuelve a leer con get() lo que realmente quedó.
+
+3. Graba 10 s reales (cuéntalos con un reloj). ¿Cuánto dura el archivo al reproducirlo? Si no coincide, explica por qué tiene que ver con el 30 que pasamos a VideoWriter.
+rabé 10 s reales y en ese tiempo el contador llegó al frame 301, es decir, unos 30 FPS reales. 
+Como VideoWriter reproduce siempre a 30 FPS, el archivo dura aproximadamente 10 s y coincide con el tiempo real. 
+Si la cámara hubiera entregado menos de 30 FPS, por ejemplo 25, se habrían escrito unos 250 frames y el archivo 
+duraría 8.3 s y se vería acelerado, porque el 30 es un valor fijo que no depende de la velocidad real de captura.
+
+4. ¿Por qué se graba frame y no vista?
+Se graba frame porque vista es una copia con el texto de FPS, las instrucciones y el punto rojo dibujados encima. 
+Si grabara vista, todo eso quedaría pegado para siempre en el video. frame es la imagen limpia de la cámara.
+
+5. ¿Qué pasa si cambias cv2.waitKey(espera) por cv2.waitKey(0) dentro del ciclo? ¿Y si lo quitas?
+Con waitKey(0) el programa se queda esperando hasta que se pulse una tecla, así que el video avanza un frame por cada pulsación. 
+Sin waitKey, la ventana no se redibuja y se congela, no se detectan teclas (Esc y Q dejan de funcionar) y el ciclo corre sin pausa, 
+por lo que un archivo de video se reproduciría a toda velocidad.
