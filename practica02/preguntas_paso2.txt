@@ -1,0 +1,25 @@
+1. Llena una tabla con el PSNR de cada filtro para ruido gaussiano y para sal y pimienta (k = 5). ¿Cuál gana en cada caso? ¿Por qué la mediana es tan buena con sal y pimienta?
+Con sigma = 25 y k = 5, el ruido dejó la imagen en 20.4 dB. 
+El gaussiano quedó en 29.8 dB, la mediana en 29.8, el promedio en 29.7 y el bilateral en 28.3. 
+Los tres primeros prácticamente empatan, con una ligera ventaja del gaussiano, que además es el más rápido. 
+Los cuatro filtros mejoran el PSNR, y el bilateral es el que menos.
+
+2. Con ruido gaussiano, sube el kernel de 3 a 15. ¿El PSNR siempre mejora? ¿Qué se pierde?
+El más lento fue el bilateral, con 13.75 ms contra 0.58 ms del gaussiano. 
+Es más lento porque para cada píxel calcula pesos con dos criterios: qué tan cerca está cada vecino y qué tan parecido es su color. 
+Eso evita borrar los bordes porque, al cruzar un borde, los píxeles del otro lado tienen un color muy distinto, reciben un peso casi cero y no contaminan el promedio. 
+Solo se promedian los vecinos parecidos.
+
+3. ¿Qué filtro es el más lento? ¿Cómo hace el bilateral para no borrar los bordes?
+El más lento fue el bilateral, con 13.75 ms contra 0.58 ms del gaussiano. Es más lento porque para cada píxel calcula pesos con dos criterios: qué tan cerca está cada vecino y qué tan parecido es su color. 
+Eso evita borrar los bordes porque, al cruzar un borde, los píxeles del otro lado tienen un color muy distinto, reciben un peso casi cero y no contaminan el promedio. 
+Solo se promedian los vecinos parecidos.
+
+4. Los pesos del kernel promedio suman 1. ¿Qué le pasaría a la imagen si sumaran 2? ¿Y 0.5?
+Si los pesos sumaran 2, cada píxel quedaría multiplicado por 2 en promedio: la imagen se vería el doble de brillante y las zonas claras se saturarían en blanco. 
+Si sumaran 0.5, quedaría a la mitad de brillo, más oscura. 
+Por eso un kernel de suavizado debe sumar 1, para conservar el brillo general.
+
+5. filter2D y cv2.blur dieron diferencia 0. ¿Qué demuestra eso sobre lo que hace cv2.blur?
+Que la diferencia máxima fue 0 demuestra que cv2.blur es exactamente una convolución con un kernel donde todos los pesos valen 1/k². 
+Es el mismo filtro que armamos a mano, solo que ya viene hecho y optimizado.
