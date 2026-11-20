@@ -1,0 +1,15 @@
+1. ¿Por qué ningún T global separa bien los objetos del fondo en el video sintético? Muévelo de 100 a 200 ydescribe qué pasa.
+La iluminación cambia a lo largo de la imagen, así que un solo umbral no sirve para separar bien todo el objeto del fondo. Al subir el umbral, más píxeles quedan marcados como objeto y también se incluye más fondo. En mi video sintético, con T = 150, el umbral global marcó el 30.7 % de la imagen como objeto.
+
+2. ¿Qué T eligió Otsu? ¿Por qué Otsu falla aquí aunque “elige el mejor T”?
+Otsu eligió T = 171. Marcó el 45.3 % de la imagen como objeto, pero no distingue objetos de fondo: solo separa los píxeles según el histograma de intensidades. Por eso también incluye partes del fondo.
+
+3.En el adaptativo, baja el Bloque a 5 y súbelo a 150. ¿Qué pasa con los objetos grandes cuando el bloque esmás pequeño que ellos?
+Con un bloque muy pequeño, el umbral cambia mucho entre zonas y la máscara puede quedar fragmentada o con ruido. Con uno más grande, el cálculo considera una región más amplia y la segmentación se vuelve menos local. Si el bloque es más pequeño que el objeto, puede clasificar partes de su interior como fondo y dejarlo incompleto o hueco.
+
+4. ¿Por qué la pelota naranja sale hueca o incompleta en el adaptativo? (Pista: compara su gris con el del fondo asu alrededor.)
+Porque el método trabaja con intensidad en escala de grises, no reconoce el color naranja. Si algunas partes de la pelota tienen un tono gris parecido al fondo que las rodea, no se separan bien y pueden quedar sin marcar.
+
+5. Sube Limpieza a 9. ¿Qué desaparece primero, las líneas o los puntos pequeños? ¿Por qué?
+Desaparecen primero los detalles más delgados o pequeños, porque la apertura morfológica los elimina si son menores que el elemento estructurante. Las líneas finas y los puntos pueden desaparecer antes que los objetos grandes.
+En mi prueba con la webcam, Otsu eligió T = 97 y el umbral global marcó 78.1 % de la imagen como objeto; esto muestra que la segmentación depende mucho de la iluminación y de la escena.
