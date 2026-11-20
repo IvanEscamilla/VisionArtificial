@@ -1,0 +1,14 @@
+1. Haz clic sobre el círculo azul y luego sobre el verde. ¿Qué valor de H tiene cada uno? ¿Por qué el rojo es un caso especial en HSV? (Pista: H va de 0 a 179 y es un círculo.)
+No registré los valores de H del círculo azul ni del verde en mis salidas. El rojo es un caso especial porque está en los dos extremos del rango circular de H: cerca de 0 y de 179.
+
+2. ¿Qué regla elimina los puntos y cuál elimina el cuadrado? Comprueba con los números de la consola.
+La regla de área mínima elimina los puntos, porque son pequeños: sus áreas fueron 88, 74 y 76, menores que 1500. La circularidad elimina el cuadrado: su área fue 4108, pero su circularidad de 0.78 es menor que el mínimo de 0.90. La pelota fue aceptada con área 4649 y circularidad 0.97.
+
+3. Cuando la pelota pasa sobre el cuadrado, ¿qué ocurre con el conteo? ¿Por qué?
+No se puede confirmar con las salidas registradas, que solo muestran el último frame. Al superponerse, la pelota y el cuadrado podrían aparecer como un solo contorno, y la circularidad de esa forma combinada podría cambiar.
+
+4. Con tu webcam y tu objeto: ¿qué rangos de H, S y V funcionaron? ¿Qué pasa si cambias la iluminación?
+En la webcam no se aceptó ningún objeto con H = 5–25, S ≥ 120 y V ≥ 80. Los nueve contornos detectados fueron rechazados, así que ese rango no se ajustó bien al objeto o a su forma. Al cambiar la iluminación, los valores de saturación y brillo pueden variar y la máscara puede dejar de detectarlo correctamente.
+
+5. Propón otra regla del dominio (posición, relación ancho/alto, color promedio…) que ayudaría en tu escena.
+Podría añadirse una regla de relación entre ancho y alto para descartar objetos demasiado alargados o irregulares, o una regla de posición si el objeto normalmente aparece en una zona conocida de la imagen.

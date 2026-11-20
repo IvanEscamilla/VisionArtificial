@@ -1,0 +1,15 @@
+1. ¿Por qué la diferencia de frames solo detecta las orillas de los objetos de color uniforme?
+Porque al comparar dos frames seguidos, la mayor parte del objeto conserva la misma intensidad. Lo que cambia principalmente es su posición, así que se marcan las zonas de las que salió y a las que se movió: sus bordes.
+
+2. Cambia Alfa a 0.001 y a 0.1. ¿Qué pasa con las “estelas” y con el tiempo que tarda el círculo azul en desaparecer?
+No registré pruebas con Alfa = 0.001 y 0.1; mis ejecuciones usaron Alfa = 0.020. En general, con Alfa = 0.001 el fondo aprende despacio, por lo que las estelas duran más y el círculo tarda más en desaparecer. Con Alfa = 0.1 aprende más rápido, así que las estelas y el círculo se absorben antes.
+
+3. ¿Cuánto tarda MOG2 en olvidar el círculo azul? ¿Qué parámetro lo controla?
+Mis salidas no indican cuánto tardó en desaparecer el círculo. En el script, MOG2 está configurado con history=300; ese parámetro controla el historial usado para aprender el fondo y afecta cuánto tarda en absorber objetos quietos.
+
+4. Con la webcam: quédate quieto 10 s y luego muévete. Después mueve la cámara. ¿Qué pasa en cada caso?
+En mi prueba con la webcam, la máscara MOG2 marcó el 0.44 % de la imagen y detectó 2 objetos en movimiento. No registré por separado las pruebas de quedarse quieto y mover la cámara. Al quedarse quieto, el modelo puede incorporar a la persona al fondo; al mover la cámara, muchos píxeles cambian y pueden detectarse como movimiento.
+
+
+5. ¿En qué aplicación real es un problema que lo quieto se vuelva fondo, y en cuál es una ventaja?
+Es un problema en vigilancia, porque una persona que permanece quieta puede dejar de detectarse. Puede ser una ventaja en conteo de tráfico o análisis de movimiento, porque el sistema se concentra en lo que cambia y deja de marcar elementos estáticos.
