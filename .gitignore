@@ -9,6 +9,7 @@ __pycache__/
 
 # Archivos que generan los scripts
 salidas/
+modelos/
 
 # Editores y sistema
 .vscode/

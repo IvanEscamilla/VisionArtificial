@@ -9,6 +9,7 @@ Material de prácticas del curso de Visión Artificial (Lic. en Inteligencia Art
 | `practica01/` | Procesamiento de imágenes: la imagen digital | [P01_Procesamiento_Imagenes.pdf](practica01/P01_Procesamiento_Imagenes.pdf) |
 | `practica02/` | Adquisición de video y filtrado | [P02_Video_Filtrado.pdf](practica02/P02_Video_Filtrado.pdf) |
 | `practica03/` | Segmentación | [P03_Segmentacion.pdf](practica03/P03_Segmentacion.pdf) |
+| `practica04/` | Redes neuronales y TinyML | [P04_Redes_Neuronales.pdf](practica04/P04_Redes_Neuronales.pdf) |
 
 ## Estructura de cada práctica
 
@@ -51,4 +52,6 @@ practica01/
    python prueba_entorno.py
    ```
 
-Requisitos: Python 3.10 o superior y VS Code con la extensión de Python. Una webcam es recomendable; si no tienes, las prácticas 2 y 3 funcionan con el video de `recursos/` usando `--video`.
+Requisitos: Python 3.10 o superior y VS Code con la extensión de Python. Una webcam es recomendable; si no tienes, las prácticas 2 y 3 funcionan con el video de `recursos/` usando `--video`, y la 4 con las fotos de `recursos/` usando `--fotos`.
+
+**Práctica 4:** TensorFlow sólo funciona con **Python 3.10, 3.11 o 3.12** (no con 3.13 o superior). Crea su entorno con `py -3.12 -m venv va` y ejecuta `pip install -r requirements.txt` **antes de la clase** (descarga ~350 MB). No actualices pip dentro del entorno.
