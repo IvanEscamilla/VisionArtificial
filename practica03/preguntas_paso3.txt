@@ -1,0 +1,14 @@
+1. Con K = 2, 3, 4 y 6, ¿en qué grupos quedan el fondo, las líneas y cada objeto? ¿Por qué el fondo se parte en varios grupos con K alto?
+Con K = 2, los colores se agrupan de forma general y el fondo puede quedar unido con algunos objetos. Al aumentar K, los objetos, las líneas y distintas zonas del fondo pueden separarse en grupos diferentes. Con K alto, el fondo se divide porque sus píxeles tienen distintos tonos e intensidades. No registré qué grupo correspondió a cada elemento en mis salidas.
+
+2. ¿Por qué el grupo k-means de la semilla incluye el cuadrado y los puntos, y la región crecida no?
+K-means agrupa píxeles por similitud de color, sin considerar si están conectados; por eso puede incluir el cuadrado y los puntos de color parecido. El crecimiento de regiones parte de la semilla y solo incorpora píxeles vecinos conectados que cumplan la tolerancia.
+
+3. Sube la Tolerancia poco a poco hasta 160. ¿A partir de qué valor la región se “derrama” al fondo? ¿Por qué tarda tanto en derramarse? (Pista: compara el canal B de la pelota con el del fondo.) ¿Y con 5?
+No pude determinarlo con mis salidas porque no seleccioné una semilla: el programa indica “No se seleccionó semilla”. Para observarlo, hay que hacer clic en un objeto durante la ejecución. La región tarda en derramarse porque el crecimiento compara los canales de color con los de la semilla; el canal B puede diferenciar la pelota del fondo. Con tolerancia 5, la región debería ser más pequeña y limitarse a los píxeles muy parecidos a la semilla.
+
+4. ¿Por qué crecer_region suaviza el frame antes de crecer?
+El suavizado reduce el ruido y las pequeñas variaciones de color entre píxeles vecinos. Así, la región puede crecer de forma más continua.
+
+5. k-means se calcula sobre el frame reducido a 1/4. ¿Qué ganas y qué pierdes?
+Se gana velocidad y se reduce el costo de cálculo. Se pierde detalle espacial, así que los bordes finos y objetos pequeños pueden representarse con menos precisión.

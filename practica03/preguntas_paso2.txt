@@ -1,0 +1,15 @@
+1. ¿Por qué la línea horizontal casi no aparece en |Gx| pero sí en |Gy|?
+Porque |Gx| detecta cambios de intensidad de izquierda a derecha y resalta principalmente bordes verticales. |Gy| detecta cambios de arriba hacia abajo, por eso resalta los bordes horizontales.
+
+2. Baja el Suavizado a 0. ¿Qué le pasa a Canny? ¿Por qué el suavizado de la Práctica 2 es indispensable antes de derivar?
+Al bajar el suavizado a 0, Canny puede detectar más ruido como si fueran bordes. Suavizar reduce esos cambios pequeños de intensidad antes de calcular las derivadas.
+
+3. Mueve Canny bajo y Canny alto. ¿Qué cambia con cada uno?
+Al bajar los umbrales, Canny detecta más bordes, pero también puede incluir ruido. Al subirlos, detecta menos bordes y puede perder los más débiles. En mi video sintético, con bajo = 50 y alto = 150, detectó 3551 píxeles de borde.
+
+4. ¿Por qué cada línea recta da dos bordes paralelos en Canny?
+Porque Canny detecta los dos lados de la línea: el cambio de intensidad al entrar en ella y el cambio al salir.
+
+5. La pelota naranja no aparece en “Regiones rellenas”. Mira el gris suavizado y explica por qué.
+En escala de grises, la pelota naranja tiene una intensidad parecida a la del fondo, así que su borde es poco marcado. Sin un contorno claro y cerrado, no se forma una región para rellenar.
+Con la webcam, la escena fue distinta: Canny detectó 3748 píxeles de borde y las regiones rellenas ocuparon el 1.6 % de la imagen.
