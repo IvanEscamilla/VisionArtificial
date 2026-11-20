@@ -1,0 +1,26 @@
+1. Compara los tres histogramas. ¿Qué hizo la ecualización con los niveles? ¿Por qué el histograma ecualizado tiene "huecos" entre barras?
+El histograma de la imagen apagada está apretado: según la salida, sus niveles van solo de 53 a 128, con desviación estándar de 14.4. 
+La ecualización los estiró a todo el rango, de 0 a 255, y la desviación subió a 73.6. 
+CLAHE abrió el histograma con moderación, de 42 a 160 y desviación de 18.6. 
+El histograma ecualizado tiene huecos porque la imagen apagada solo tenía unos 76 niveles distintos (de 53 a 128). 
+La ecualización reubica cada nivel existente en uno nuevo, más separado, pero no puede inventar los niveles intermedios, así que quedan vacíos entre las barras.
+
+2. La ecualización global hace muy visible el ruido del fondo. ¿Qué hace distinto CLAHE para evitarlo? Sube el clip a 10: ¿qué pasa?
+La ecualización global aplica una sola regla a toda la imagen, así que las zonas planas y oscuras con ruido también se estiran y el ruido se vuelve muy visible. C
+LAHE trabaja por zonas (una rejilla de 8×8) y recorta el histograma de cada zona en el valor del clip, lo que limita cuánto puede crecer el contraste y, con eso, el ruido. 
+Con el clip en 10 el límite es mucho más flojo, así que CLAHE se acerca a una ecualización local sin freno: más contraste, pero también más ruido y posibles marcas entre las zonas. 
+Confírmalo en tu ventana moviendo la barra a 100.
+
+3. Sube el afilado a 5. Describe los halos que aparecen. ¿Por qué el afilado también hace más visible el ruido?
+Con el afilado en 5, junto a los bordes aparecen bandas claras en el lado claro y oscuras en el lado oscuro, es decir, un contorno que sobrepasa el brillo real del borde (los halos).
+
+
+4. Los pesos del kernel de nitidez suman 1. ¿Qué le pasa a una zona plana (todos los píxeles iguales) al aplicarlo? ¿Y a un borde?
+En una zona plana no pasa nada: con todos los píxeles iguales a v, el kernel da 5v − 4v = v, así que la zona queda igual (por eso sus pesos suman 1 y se conserva el brillo general). 
+En un borde sí cambia: el píxel del lado claro se vuelve más claro y el del lado oscuro más oscuro, porque se le resta lo de sus vecinos. 
+Esto aumenta el contraste justo en el borde y lo hace más marcado.
+
+5. En un sistema de visión, ¿en qué caso pondrías una ecualización antes de umbralizar? ¿Y en qué caso un suavizado?
+Pondría una ecualización antes de umbralizar cuando la imagen tiene poco contraste (oscura o lavada, con el histograma apretado), porque así el umbral puede separar el objeto del fondo. 
+Pondría un suavizado cuando la imagen tiene ruido, ya que el ruido deja píxeles sueltos que el umbral clasifica mal; con sal y pimienta usaría la mediana. 
+Si hay ambos problemas, conviene suavizar primero, porque la ecualización amplifica el ruido.
